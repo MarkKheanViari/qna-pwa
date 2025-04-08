@@ -11,9 +11,16 @@ const noBtn = document.getElementById('noBtn');
 
 // Questions
 const questions = {
-  1: "Did you eat?",
-  2: "Why? Eat your food!",
-  3: "EAT!"
+  1: "Nag Kaon ka na Love? 🥰",
+  2: "Kumain ka na! 🍽️",
+  3: "Kakain o Kakain?? 😚"
+};
+
+// Messages for "No" responses
+const noMessages = {
+  1: "Bakit hindi pa? 🥺",
+  2: "Isa! 😤",
+  3: "Please ❤️"
 };
 
 // Initialize the app
@@ -26,10 +33,13 @@ function updateQuestion() {
   messageBox.textContent = '';
   yesBtn.style.display = 'inline-block';
   noBtn.style.display = noClickCount < 10 ? 'inline-block' : 'none';
+  if (noClickCount >= 10) {
+    messageBox.textContent = 'Wala kang no choice! 😜';
+  }
 }
 
 function handleYes() {
-  messageBox.textContent = 'Yeheyyy';
+  messageBox.textContent = 'Yeheyyy! Good job, Love! 🎉';
   yesBtn.style.display = 'none';
   noBtn.style.display = 'none';
   questionBox.textContent = '';
@@ -43,15 +53,17 @@ function handleNo() {
   noClickCount++;
   if (currentStep < 3) {
     currentStep++;
-    updateQuestion();
+    messageBox.textContent = noMessages[currentStep - 1];
   } else {
-    questionBox.textContent = questions[3];
+    messageBox.textContent = noMessages[3];
   }
   yesButtonSize += 5;
   yesBtn.style.fontSize = `${yesButtonSize}px`;
   if (noClickCount >= 10) {
     noBtn.style.display = 'none';
+    messageBox.textContent = 'Wala kang no choice! 😜';
   }
+  updateQuestion();
 }
 
 // Start the app
