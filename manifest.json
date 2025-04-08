@@ -1,6 +1,6 @@
 {
-    "name": "QnA App Love",
-    "short_name": "QnA Love",
+    "name": "",
+    "short_name": "",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffe6f0",
