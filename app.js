@@ -1,71 +1,31 @@
-// State variables
-let currentStep = 1;
-let yesButtonSize = 16;
-let noClickCount = 0;
-
 // DOM elements
-const questionBox = document.getElementById('question');
-const messageBox = document.getElementById('message');
-const yesBtn = document.getElementById('yesBtn');
-const noBtn = document.getElementById('noBtn');
+const giftBox = document.getElementById('giftBox');
+const prizeBox = document.getElementById('prize');
+const poppersContainer = document.getElementById('poppers');
 
-// Questions
-const questions = {
-  1: "Nag Kaon ka na Love? 🥰",
-  2: "Kumain ka na! 🍽️",
-  3: "Kakain o Kakain?? 😚"
-};
+// Function to handle gift box click
+function openGift() {
+  // Hide the gift box
+  giftBox.classList.add('hidden');
 
-// Messages for "No" responses
-const noMessages = {
-  1: "Bakit hindi pa? 🥺",
-  2: "Isa! 😤",
-  3: "Please ❤️"
-};
+  // Reveal the prize
+  prizeBox.textContent = '🫰';
+  prizeBox.classList.add('reveal');
 
-// Initialize the app
-function init() {
-  updateQuestion();
+  // Trigger poppers effect
+  poppersContainer.classList.add('active');
+  createPoppers();
 }
 
-function updateQuestion() {
-  questionBox.textContent = questions[currentStep];
-  messageBox.textContent = '';
-  yesBtn.style.display = 'inline-block';
-  noBtn.style.display = noClickCount < 10 ? 'inline-block' : 'none';
-  if (noClickCount >= 10) {
-    messageBox.textContent = 'Wala kang no choice! 😜';
+// Function to create popper particles
+function createPoppers() {
+  const numPoppers = 30; // Number of popper particles
+  for (let i = 0; i < numPoppers; i++) {
+    const popper = document.createElement('div');
+    popper.classList.add('popper');
+    // Randomize position and animation delay
+    popper.style.left = `${Math.random() * 100}%`;
+    popper.style.animationDelay = `${Math.random() * 0.5}s`;
+    poppersContainer.appendChild(popper);
   }
 }
-
-function handleYes() {
-  messageBox.textContent = 'Yeheyyy! Good job, Love! 🎉';
-  yesBtn.style.display = 'none';
-  noBtn.style.display = 'none';
-  questionBox.textContent = '';
-  currentStep = 1;
-  yesButtonSize = 16;
-  noClickCount = 0;
-  yesBtn.style.fontSize = `${yesButtonSize}px`;
-}
-
-
-function handleNo() {
-  noClickCount++;
-  if (currentStep < 3) {
-    currentStep++;
-    messageBox.textContent = noMessages[currentStep - 1];
-  } else {
-    messageBox.textContent = noMessages[3];
-  }
-  yesButtonSize += 5;
-  yesBtn.style.fontSize = `${yesButtonSize}px`;
-  if (noClickCount >= 10) {
-    noBtn.style.display = 'none';
-    messageBox.textContent = 'Wala kang no choice! 😜';
-  }
-  updateQuestion();
-}
-
-// Start the app
-init();

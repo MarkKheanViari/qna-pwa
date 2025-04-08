@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "Survey PetPal Capstone",
+    "short_name": "Survey PetPal",
     "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#ffe6f0",
