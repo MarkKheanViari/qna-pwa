@@ -49,6 +49,7 @@ function handleYes() {
   yesBtn.style.fontSize = `${yesButtonSize}px`;
 }
 
+
 function handleNo() {
   noClickCount++;
   if (currentStep < 3) {
